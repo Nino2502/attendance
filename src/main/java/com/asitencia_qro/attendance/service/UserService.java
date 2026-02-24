@@ -1,7 +1,9 @@
 package com.asitencia_qro.attendance.service;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.asitencia_qro.attendance.model.UserModel;
 import com.asitencia_qro.attendance.repository.UsersRepository;
 
@@ -14,7 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserModel savaUser(UserModel user){
+    public UserModel saveUser(UserModel user){
         return userRepository.save(user);
 
     }

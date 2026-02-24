@@ -1,5 +1,4 @@
 package com.asitencia_qro.attendance.model;
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -9,48 +8,48 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class UserModel {
+@Table(name = "attendance")
+public class AttedanceModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "employee_code")
-    private String employeeCode;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    private String email;
-
-    private String password;
-
     @ManyToOne
-    @JoinColumn(name = "department_id")
-    private DepartamentModel departamentoId;
+    @JoinColumn(name = "user_id", nullable=false)
+    private UserModel user;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private RoleModel role;
+    @Column(name = "check_in")
+    private LocalDateTime checkInTime;
 
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private WorkScheduleModel schedule;
+    @Column(name = "check_out")
+    private LocalDateTime checkOutTime;
 
-    private Boolean active;
+    private String status;
+
+    private String notes;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate(){
+        createdAt = LocalDateTime.now();
+    }
 
 }

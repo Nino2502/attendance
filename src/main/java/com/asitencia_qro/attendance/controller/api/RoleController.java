@@ -1,4 +1,4 @@
-package com.asitencia_qro.attendance.controller;
+package com.asitencia_qro.attendance.controller.api;
 
 
 import java.util.List;
