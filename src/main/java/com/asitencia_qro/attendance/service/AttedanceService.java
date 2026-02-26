@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class AttedanceService {
     private final AttedanceRepository attendanceRepository;
     private final UsersRepository userRepository;
 
-    public AttedanceModel registerAttendance(Integer userId) {
+    public AttedanceModel registerAttendance(UUID userId) {
 
         UserModel user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

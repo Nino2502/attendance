@@ -1,6 +1,7 @@
 package com.asitencia_qro.attendance.controller.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class AttendanceController {
 
 
     @PostMapping("/register/{userId}")
-    public AttedanceModel register(@PathVariable Integer userId) {
+    public AttedanceModel register(@PathVariable UUID userId) {
         return attendanceService.registerAttendance(userId);
     }
 
@@ -36,7 +37,7 @@ public class AttendanceController {
 
 
     @GetMapping("/user/{userId}")
-    public List<AttedanceModel> getByUser(@PathVariable Integer userId) {
+    public List<AttedanceModel> getByUser(@PathVariable UUID userId) {
         return attendanceRepository.findAll()
                 .stream()
                 .filter(a -> a.getUser().getId().equals(userId))

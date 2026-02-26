@@ -3,6 +3,8 @@ package com.asitencia_qro.attendance.model;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -25,9 +29,12 @@ import lombok.Setter;
 @Table(name = "work_schedules")
 public class WorkScheduleModel {
 
-   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
+    @Id
+    @UuidGenerator
+    @Column(updatable = false, nullable = false)
+    private UUID id;
+
 
     private String name;
 

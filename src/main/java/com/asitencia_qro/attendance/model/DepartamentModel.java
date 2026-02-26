@@ -14,6 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+import org.hibernate.annotations.UuidGenerator;
+
 @Getter
 @Setter
 @Entity
@@ -25,8 +28,8 @@ import lombok.Setter;
 public class DepartamentModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @UuidGenerator
+    private UUID id;
 
     @Column(name = "name", length=100, nullable = false)
     private String name; 

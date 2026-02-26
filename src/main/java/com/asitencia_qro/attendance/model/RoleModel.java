@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import java.util.UUID;
+import org.hibernate.annotations.UuidGenerator;
+
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,9 +21,8 @@ public class RoleModel {
 
     //Esto es para identificar PK
     @Id
-    //Se va a generar automatico el ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @UuidGenerator
+    private UUID id;
 
     //No permite null ni duplicados
     @Column(nullable = false, unique = true)

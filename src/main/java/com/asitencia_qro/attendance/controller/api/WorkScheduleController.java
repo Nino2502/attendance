@@ -15,6 +15,7 @@ import com.asitencia_qro.attendance.service.WorkScheduleService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/schedules")
@@ -35,12 +36,12 @@ public class WorkScheduleController {
 
     @GetMapping("/{id}")
     public WorkScheduleModel getById(
-        @PathVariable Integer id) {
+        @PathVariable UUID id) {
         return service.getById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
 }

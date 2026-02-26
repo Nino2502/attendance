@@ -8,6 +8,7 @@ import com.asitencia_qro.attendance.model.WorkScheduleModel;
 import com.asitencia_qro.attendance.repository.WorkScheduleRepository;
 
 import lombok.RequiredArgsConstructor;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,12 +24,12 @@ public class WorkScheduleService {
         return repository.findAll();
     }
 
-    public WorkScheduleModel getById(Integer id) {
+    public WorkScheduleModel getById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Horario no encontrado"));
     }
 
-    public void delete(Integer id) {
+    public void delete(UUID id) {
         repository.deleteById(id);
     }
 }

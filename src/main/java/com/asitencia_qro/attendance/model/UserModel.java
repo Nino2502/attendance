@@ -12,6 +12,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.UUID;
+
+import org.hibernate.annotations.UuidGenerator;
 
 @Getter
 @Setter
@@ -20,8 +23,9 @@ import lombok.Setter;
 public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @UuidGenerator
+    @Column(updatable = false, nullable = false)
+    private UUID id;
 
     @Column(name = "employee_code")
     private String employeeCode;

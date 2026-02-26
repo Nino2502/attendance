@@ -16,6 +16,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+import org.hibernate.annotations.UuidGenerator;
+
 @Getter
 @Setter
 
@@ -27,8 +30,8 @@ import lombok.Setter;
 public class AttedanceModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @UuidGenerator
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable=false)
