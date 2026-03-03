@@ -2,6 +2,8 @@ package com.asitencia_qro.attendance.controller.api;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asitencia_qro.attendance.model.UserModel;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import com.asitencia_qro.attendance.service.UserService;
 
 import com.asitencia_qro.attendance.dto.LoginRequest;
@@ -35,19 +39,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public UserModel login(@RequestBody LoginRequest request) {
-        UserModel user = userService.findByEmail(request.getEmail());
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
+        UserModel user = userService.validateLogin(
+                request.getEmail(),
+                request.getPassword());
 
         if (user == null) {
-            throw new RuntimeException("Usuario no encontrado");
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body("Credenciales incorrectas");
         }
 
-        if (!user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
-        }
-
-        return user;
-
+        return ResponseEntity.ok(user);
     }
 
 }

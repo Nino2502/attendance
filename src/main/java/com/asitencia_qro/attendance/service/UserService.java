@@ -18,22 +18,38 @@ public class UserService {
     private final UsersRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UsersRepository userRepository){
+    public UserService(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public UserModel saveUser(UserModel user){
+    public UserModel saveUser(UserModel user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
 
     }
-    public List<UserModel> getAllUsers(){
+
+    public List<UserModel> getAllUsers() {
         return userRepository.findAll();
     }
 
     public UserModel findByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
-  
+
+    public UserModel validateLogin(String email, String rawPassword) {
+
+        UserModel user = findByEmail(email);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+            return null;
+        }
+
+        return user;
+    }
+
 }
